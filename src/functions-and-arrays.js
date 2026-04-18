@@ -133,14 +133,30 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray() {}
+function uniquifyArray(wordsUnique) {
+  let uniqueWords = [];
+  for (let i = 0; i < wordsUnique.length; i++) {
+    if (!uniqueWords.includes(wordsUnique[i])) {
+      uniqueWords.push(wordsUnique[i]);
+    }
+  }
+  return uniqueWords;
+}
 
 
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist() {}
+function doesWordExist(words, wordtoFind) {
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] === wordtoFind) {
+      return true;
+    } 
+   }
+  
+  return false;
+}
 
 
 
@@ -159,9 +175,15 @@ const wordsCount = [
   'matter'
 ];
 
-function howManyTimes() {}
-
-
+function howManyTimes(words, wordtoFind) {
+  let count = 0;
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] === wordtoFind) {
+      count++;
+    }
+  }
+  return count;
+}
 
 // Iteration #8: Bonus
 const matrix = [
@@ -187,7 +209,45 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
+function greatestProduct(matrix) {
+  let maxProduct = 0;
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+     // horizontal
+      if (j <= matrix[i].length - 4) {
+        const product = matrix[i][j] * matrix[i][j + 1] * matrix[i][j + 2] * matrix[i][j + 3];
+        if (product > maxProduct) {
+          maxProduct = product;
+        }
+      }
+        // vertical
+      if (i <= matrix.length - 4) {
+        const product = matrix[i][j] * matrix[i + 1][j] * matrix[i + 2][j] * matrix[i + 3][j];
+        if (product > maxProduct) {
+          maxProduct = product;
+        }
+      }
+      // Check diagonal products (top-left to bottom-right)
+      if (i <= matrix.length - 4 && j <= matrix[i].length - 4) {
+        const product = matrix[i][j] * matrix[i + 1][j + 1] * matrix[i + 2][j + 2] * matrix[i + 3][j + 3];
+        if (product > maxProduct) {
+          maxProduct = product;
+        }
+      }
+      // Check diagonal products (top-right to bottom-left)
+      if (i <= matrix.length - 4 && j >= 3) {
+        const product = matrix[i][j] * matrix[i + 1][j - 1] * matrix[i + 2][j - 2] * matrix[i + 3][j - 3];
+        if (product > maxProduct) {
+          maxProduct = product;
+        }
+      }
+    }
+  }
+
+  return maxProduct;
+
+}
 
 
 
